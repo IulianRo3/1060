@@ -20,7 +20,7 @@ public:
 
 	Masina(int an);
 
-	Masina(Masina &masinaNoua);
+	Masina(const Masina &masinaNoua);
 
 	int getCod() {
 		return this->cod;
@@ -67,7 +67,7 @@ public:
 };
 int Masina::nrMasina = 100;
 
-Masina::Masina(Masina &masinaNoua) :cod(masinaNoua.cod) {
+Masina::Masina(const Masina &masinaNoua) :cod(masinaNoua.cod) {
 	this->nrMasina = masinaNoua.nrMasina;
 	this->an = masinaNoua.an;
 	this->culoare = new char[strlen(masinaNoua.culoare) + 1];
