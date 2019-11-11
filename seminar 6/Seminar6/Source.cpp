@@ -57,7 +57,7 @@ public:
 		}
 	}
 	//////////////////////OPERATORI////////////////////////////
-	Contor &operator=(Contor &contorNou) {
+	Contor &operator=(const Contor &contorNou) {
 		if (this->culoare != NULL) {
 			delete[] this->culoare;
 		}
@@ -85,7 +85,10 @@ public:
 		this->valori[0] += 50;
 		return temp;
 	}
-
+	Contor &operator+(int valoareMarita) {
+		this->valori[0] += valoareMarita;
+		return *this;
+	}
 	friend ostream &operator<<(ostream& consola, Contor c);
 	friend istream &operator>>(istream& in, Contor &c);
 
@@ -192,8 +195,19 @@ int main() {
 	cout << (c5++).getValoare(0) << endl;
 	cout << c5.getValoare(0) << endl;
 
-	//op <<
+	//op << si >>
 	cout << c5;
-	cin >> c5;
-	cout << c5;
+	//cin >> c5;
+	//cout << c5;
+
+	//op +
+	c5 = c2 + 10; //se pierde referinta daca faci asa si de asta ai valori aiurea bagate
+	cout << "c5 + 10 = " << c5.getValoare(0) << endl;
+	cout << sizeof(int);
+	cout << sizeof(short);
+
+	cout << sizeof(long);
+	cout << sizeof(double);
+
+
 }
