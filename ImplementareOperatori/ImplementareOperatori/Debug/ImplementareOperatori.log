@@ -1,0 +1,26 @@
+﻿  Source.cpp
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(18): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(13): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(29): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(25): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(36): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(69): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(88): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(84): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(107): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(134): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(167): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(186): warning C4018: '<': signed/unsigned mismatch
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(179): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(56): warning C4715: 'Magazin::getPret': not all control paths return a value
+c:\users\rares\source\repos\implementareoperatori\implementareoperatori\source.cpp(110): warning C4715: 'Magazin::operator[]': not all control paths return a value
+  ImplementareOperatori.vcxproj -> C:\Users\Rares\source\repos\ImplementareOperatori\Debug\ImplementareOperatori.exe
