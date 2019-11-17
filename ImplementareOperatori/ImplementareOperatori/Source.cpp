@@ -1,4 +1,6 @@
 #include<iostream>
+#include<string> //includeti pentru string libraria string
+
 using namespace std;
 
 class Magazin {
@@ -7,11 +9,14 @@ private:
 	unsigned int nrProduse;
 	int *preturiProduse;
 	bool esteNonStop;
+	string culoareMagazin;//asa se defineste un string
 public:
 	Magazin() {
 		this->numeMagazin = new char[strlen("Magazin default") + 1];
 		strcpy(this->numeMagazin, "Magazin default");
 		this->esteNonStop = false;
+
+		this->culoareMagazin = "Negru"; //usor nu? :)) 
 
 		this->nrProduse = 2;
 		this->preturiProduse = new int[nrProduse];
@@ -19,7 +24,10 @@ public:
 			this->preturiProduse[i] = 10 + i;
 		}
 	}
-	Magazin(const char* numeMagazin, unsigned int nrProduse, int *preturiProduse, bool esteNonStop) {
+	Magazin(const char* numeMagazin, unsigned int nrProduse, int *preturiProduse, bool esteNonStop, string culoareMagazin) {
+
+		this->culoareMagazin = culoareMagazin;//la string practic nu mai trebuie sa faci nimic.  atribui direct 
+
 		this->esteNonStop = esteNonStop;
 		this->numeMagazin = new char[strlen(numeMagazin) + 1];
 		strcpy(this->numeMagazin, numeMagazin);
@@ -31,6 +39,8 @@ public:
 		}
 	}
 	Magazin(Magazin &magazinNou) {
+		this->culoareMagazin = magazinNou.culoareMagazin;//string...atribuire directa..practic se comporata ca o primitiva int, float, double
+
 		this->esteNonStop = magazinNou.esteNonStop;
 		this->numeMagazin = new char[strlen(magazinNou.numeMagazin) + 1];
 		strcpy(this->numeMagazin, magazinNou.numeMagazin);
@@ -48,6 +58,18 @@ public:
 		if (preturiProduse != NULL) {
 			delete[] this->preturiProduse;
 		}
+	}
+	// get string
+	string getCuloareMagazin() {
+		return this->culoareMagazin;
+	}
+	//set string
+	void setCuloareMagazin(string culoareMagazin) {
+		//validare daca string-ul primit este gol, adica daca vine din main: ""; primitiva ,string nu poate fi NULL;
+		if (culoareMagazin.empty()) {
+			throw new exception("Culoarea magazinului nu este transmisa");
+		}
+		this->culoareMagazin = culoareMagazin;//atribuire
 	}
 	int getPret(int index) {
 		if (index >= 0 && index < this->nrProduse) {
@@ -83,6 +105,8 @@ public:
 		this->numeMagazin = new char[strlen(magazinNou.numeMagazin) + 1];
 		strcpy(this->numeMagazin, magazinNou.numeMagazin);
 		this->nrProduse = magazinNou.nrProduse;
+
+		this->culoareMagazin = magazinNou.culoareMagazin;//atribuire string
 
 		this->preturiProduse = new int[magazinNou.nrProduse];
 		for (int i = 0; i < magazinNou.nrProduse; i++) {
@@ -162,7 +186,9 @@ public:
 };
 
 ostream &operator<<(ostream &consola, const Magazin m) {
-	consola << "Nume magazin: " << m.numeMagazin << " Este magazin non-stop: " << m.esteNonStop << " Magazinul are " << m.nrProduse << " produse.\n";
+	//am adaugat string-ul la afisare
+	consola << "Nume magazin: " << m.numeMagazin << " Este magazin non-stop: " << m.esteNonStop << " Culoare magazin: " << m.culoareMagazin
+		<< " Magazinul are " << m.nrProduse << " produse.\n";
 	consola << "Preturi produse magazin: ";
 	for (int i = 0; i < m.nrProduse; i++) {
 		consola << m.preturiProduse[i] << " ";
@@ -173,10 +199,25 @@ ostream &operator<<(ostream &consola, const Magazin m) {
 istream &operator>>(istream &in, Magazin &m) {
 	cout << "Citire informatii despre magazin de la tastatura\n"; \
 
-		char aux[100];
+	char aux[100];
 	cout << "Nume magazin: "; in >> aux;
 	m.numeMagazin = new char[strlen(aux) + 1];
 	strcpy(m.numeMagazin, aux);
+
+
+	//citire string de la tastatura.
+	cin.ignore();//este nevoie de acest ignore pentru ca citirea operatorului >> se suprapune cu getline()
+	//si nu te va lasa sa citesti de la tastatura cu getline
+	//versiunea de visual studio de la facultate ne-a permis sa folosim getline fara acest ignore(in sem 7 gr 1047). posibil acasa sa nu va mearga
+
+	cout << "Culoare magazin: ";  in.getline(aux, 100);//puteti citi SI asa de la tastatura; 
+	m.culoareMagazin = aux;
+
+	//sau puteti citi la fel ca la m.numeMagazin(in>>aux;);  pentru string poti direct: in>>m.culoareMagazin;
+	//am folosit getline pentru a citi mai multe cuvinte cu spatii. Daca citim  "Ana are mere" o sa preia toata valoarea
+	//daca folosim in>>m.culoareMagazin atunci va citit doar primul cuvant adica "Ana"
+	//...in>> va citi doar pana la primul spatiu. Deci puteti folosi getline si la m.numeMagazin. e mai sigur.
+	//daca nu vreti sa va complicati cu cin.ignore si getline puteti folosi direct in>>m.culoareMagazin; dar asta inseamna ca nu puteti scrie cu spatii
 
 	cout << "Este non-stop: "; in >> m.esteNonStop;
 	cout << "Nr. produse: "; in >> m.nrProduse;
@@ -201,8 +242,29 @@ int main() {
 
 	int preturiProduse[] = { 100,150,170,200 };
 	unsigned nrProduse = 4;
-	Magazin m2("MegaImage", nrProduse, preturiProduse, true);
+	Magazin m2("MegaImage", nrProduse, preturiProduse, true, "Verde");
 	cout << m2;
+
+	////////////STRING//////
+	m2.setCuloareMagazin("ALBASTRU");//testare setter pt un string
+	cout << m2;
+	///ca fapt divers va puteti juca usor cu string-urile
+	string x = "Rares";
+	string y = "Ciobanu";
+	x = x + " " + y;//asa se concateneaza string-urile
+	cout << endl << endl;
+
+
+	cout << "Concatenare string-uri: " << x << endl;//va afisa Ciobanu Rares;
+	//string-ul are diferite functii. De ex poti afla usor ce lungime are. La char nu poti. 
+	cout << "Lungime x: " << x.length() << endl;
+	//puteti afla usor orice caracter in string. se comporata ca un vector de litere
+	cout << "Primul caracter din string este: " << x[0] << endl;
+	//sau puteti modifica orice caracter din string
+	x[0] = 'M';
+	cout << "String-ul modificat: " << x << endl << endl;
+	//citirea unui string de la tastatura: cin>>x;
+
 
 	//const de copiere
 	Magazin m3 = m2;
@@ -216,8 +278,8 @@ int main() {
 
 	//op >> si <<
 	Magazin m5;
-	//cin >> m5;
-	cout << m5;
+	cin >> m5;
+	cout << m5 << endl;
 
 	cout << "Operator --" << endl;
 
