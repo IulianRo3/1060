@@ -1,0 +1,8 @@
+﻿  Source.cpp
+c:\users\rares\desktop\1060\seminar 10\ex2\seminar10grupa1060ex2\source.cpp(36): warning C4584: 'Manager': base-class 'IAfisare' is already a base-class of 'Angajat'
+  c:\users\rares\desktop\1060\seminar 10\ex2\seminar10grupa1060ex2\source.cpp(5): note: see declaration of 'IAfisare'
+  c:\users\rares\desktop\1060\seminar 10\ex2\seminar10grupa1060ex2\source.cpp(10): note: see declaration of 'Angajat'
+c:\users\rares\desktop\1060\seminar 10\ex2\seminar10grupa1060ex2\source.cpp(62): warning C4584: 'Inginer': base-class 'IAfisare' is already a base-class of 'Angajat'
+  c:\users\rares\desktop\1060\seminar 10\ex2\seminar10grupa1060ex2\source.cpp(5): note: see declaration of 'IAfisare'
+  c:\users\rares\desktop\1060\seminar 10\ex2\seminar10grupa1060ex2\source.cpp(10): note: see declaration of 'Angajat'
+  Seminar10Grupa1060Ex2.vcxproj -> C:\Users\Rares\Desktop\1060\seminar 10\ex2\Debug\Seminar10Grupa1060Ex2.exe
