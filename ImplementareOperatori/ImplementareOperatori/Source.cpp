@@ -198,6 +198,9 @@ ostream &operator<<(ostream &consola, const Magazin m) {
 }
 istream &operator>>(istream &in, Magazin &m) {
 	cout << "Citire informatii despre magazin de la tastatura\n"; \
+	//dezalocare memorie existenta
+	delete[] m.numeMagazin;
+	delete[] m.preturiProduse;
 
 	char aux[100];
 	cout << "Nume magazin: "; in >> aux;
