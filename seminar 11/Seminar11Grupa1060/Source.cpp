@@ -70,15 +70,43 @@ public:
 
 		return in;
 	}
-	friend ifstream& operator>>(ifstream &in, Cadou &c) {
-		in >> c.pret;
+	friend ifstream& operator>>(ifstream& in, Cadou &c) {
+		///------------------------
+		//varianta de mai jos e valabila cand fisierul din care citim e de forma: 
+		//200
+		//Ionut Popescu
 
+		//daca se citeste din fisier/tastatura cu OPERATORUL ">>"(ex: in>>c.pret) si dupa cu "in.getline(aux, sizeof(aux));" nu va functiona bine citirea
+		//...pt ca ramane blocat in buffer un sfarsit de linie ("\n")...pt a evita asta trebuie adaugata un in.ignore() intre comenzi. EXEMPLU:
+
+		/*in >> c.pret;
 		char aux[100];
-		in >> aux;
+		in.ignore();//neaparat aceasta apelare de functie pentru ca ramane blocat in buffer sfarsitul de linie "\n"
+		in.getline(aux, sizeof(aux));
 
 		delete[] c.numeDestinatar;
 		c.numeDestinatar = new char[strlen(aux) + 1];
-		strcpy(c.numeDestinatar, aux);
+		strcpy(c.numeDestinatar, aux);*/
+
+		//o varianta mai simpla ar fi citirea folosind string-uri si getline(in,temp) fara a folosi ">>"
+
+		//ATENTIE metoda getline(in,temp) este din namespace-ul std:: , iar in.getline(aux,sizeof(aux)) este din ifstream....sunt doua lucruri complet dif.
+		//200
+		//Ionut Popescu
+		string temp;
+
+		getline(in, temp);//daca fiecare linie va fi citita intr-un string ==> trebuie facute cast-uri din string spre primitiva de care avem nevoie.
+		c.pret = stoi(temp);//stoi - cast string->int .....=string to int....nu trebuie invatata pe de rost functia. Este ceva sugestiv..
+
+		//stod - cast string->double
+		//stof - cast string->float
+		//stol - cast string->long
+
+		getline(in, temp);//citire linie noua
+
+		delete[] c.numeDestinatar;//eliberare memorie existenta - asa evitam memory leaks
+		c.numeDestinatar = new char[temp.length() + 1];
+		strcpy(c.numeDestinatar, temp.c_str());//cast string->char*
 
 		return in;
 	}
@@ -124,10 +152,10 @@ void main() {
 	//ios::noreplace - doar pt a crea un nou fisier
 	//ios::ate - deschide fisierul si merge la sfarsitul lui - fol pt adaugare info la final
 	//ios::binary - fisierul deschis va contine doar informatii binare
-	cout << "Fisiere: ";
+	cout << "Fisiere: \n";
 
-	Cadou c2(125, "Marius");
-	cout << c2;
+	Cadou c2(125, "Marius Ionescu");
+	cout << "Ce salvam in fisier:\n" << c2 << endl;;
 
 	//scriere in fisier
 	ofstream fisTxtOut("fixTxtOut.txt", ios::out);

@@ -202,25 +202,16 @@ istream &operator>>(istream &in, Magazin &m) {
 	delete[] m.numeMagazin;
 	delete[] m.preturiProduse;
 
-	char aux[100];
-	cout << "Nume magazin: "; in >> aux;
-	m.numeMagazin = new char[strlen(aux) + 1];
-	strcpy(m.numeMagazin, aux);
+	//am folosit getline pentru a citi mai multe cuvinte cu spatii. Daca citim  "Ana are mere" o sa preia toata valoarea;
+	//daca folosim in>>m.culoareMagazin atunci va citit doar primul cuvant adica "Ana";
+	//string-ul citit de la tastatura trebuie transformat in char*
+	string aux;
+	cout << "Nume magazin: "; getline(in, aux);
+	m.numeMagazin = new char[aux.length() + 1];//calculeaza dim string-ului...
+	strcpy(m.numeMagazin, aux.c_str());
 
-
-	//citire string de la tastatura.
-	cin.ignore();//este nevoie de acest ignore pentru ca citirea operatorului >> se suprapune cu getline()
-	//si nu te va lasa sa citesti de la tastatura cu getline
-	//versiunea de visual studio de la facultate ne-a permis sa folosim getline fara acest ignore(in sem 7 gr 1047). posibil acasa sa nu va mearga
-
-	cout << "Culoare magazin: ";  in.getline(aux, 100);//puteti citi SI asa de la tastatura; 
-	m.culoareMagazin = aux;
-
-	//sau puteti citi la fel ca la m.numeMagazin(in>>aux;);  pentru string poti direct: in>>m.culoareMagazin;
-	//am folosit getline pentru a citi mai multe cuvinte cu spatii. Daca citim  "Ana are mere" o sa preia toata valoarea
-	//daca folosim in>>m.culoareMagazin atunci va citit doar primul cuvant adica "Ana"
-	//...in>> va citi doar pana la primul spatiu. Deci puteti folosi getline si la m.numeMagazin. e mai sigur.
-	//daca nu vreti sa va complicati cu cin.ignore si getline puteti folosi direct in>>m.culoareMagazin; dar asta inseamna ca nu puteti scrie cu spatii
+	//citire direct in string
+	cout << "Culoare magazin: ";  getline(in, m.culoareMagazin);
 
 	cout << "Este non-stop: "; in >> m.esteNonStop;
 	cout << "Nr. produse: "; in >> m.nrProduse;
