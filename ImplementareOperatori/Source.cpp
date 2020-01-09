@@ -38,7 +38,7 @@ public:
 			this->preturiProduse[i] = preturiProduse[i];
 		}
 	}
-	Magazin(Magazin &magazinNou) {
+	Magazin(const Magazin &magazinNou) {
 		this->culoareMagazin = magazinNou.culoareMagazin;//string...atribuire directa..practic se comporata ca o primitiva int, float, double
 
 		this->esteNonStop = magazinNou.esteNonStop;
@@ -132,6 +132,7 @@ public:
 			return this->preturiProduse[index];
 		}
 	}
+
 	//se poate implementa la fel si pt op. -= sau *= 
 	Magazin &operator+=(int valoare) {
 		this->preturiProduse[0] += valoare;
@@ -176,8 +177,8 @@ public:
 	//Se adauga friend in fata unei functii pentru ca trebuie sa accesam membrii privati ai obiectului Magazin din exteriorul clasei.
 
 	//se poate implementa la fel si pt op. - sau op. * sau op. /
-	friend Magazin operator+(Magazin &m, int valoare); // o adunare poate fi: obj + 4 sau 4 + obj => trebuie implementat operatorul + in 2 forme
-	friend Magazin operator+(int valoare, Magazin &m);
+	friend Magazin operator+(Magazin m, int valoare); // o adunare poate fi: obj + 4 sau 4 + obj => trebuie implementat operatorul + in 2 forme
+	friend Magazin operator+(int valoare, Magazin m);
 	//operator de afisare
 	friend ostream &operator<<(ostream &consola, const Magazin m);
 	//operator de citire de la tastatura
@@ -197,15 +198,16 @@ ostream &operator<<(ostream &consola, const Magazin m) {
 	return consola;
 }
 istream &operator>>(istream &in, Magazin &m) {
-	cout << "Citire informatii despre magazin de la tastatura\n"; \
 	//dezalocare memorie existenta
 	delete[] m.numeMagazin;
 	delete[] m.preturiProduse;
 
-	//am folosit getline pentru a citi mai multe cuvinte cu spatii. Daca citim  "Ana are mere" o sa preia toata valoarea;
-	//daca folosim in>>m.culoareMagazin atunci va citit doar primul cuvant adica "Ana";
-	//string-ul citit de la tastatura trebuie transformat in char*
-	string aux;
+	cout << "Citire informatii despre magazin de la tastatura\n"; \
+
+		//am folosit getline pentru a citi mai multe cuvinte cu spatii. Daca citim  "Ana are mere" o sa preia toata valoarea;
+		//daca folosim in>>m.culoareMagazin atunci va citit doar primul cuvant adica "Ana";
+		//string-ul citit de la tastatura trebuie transformat in char*
+		string aux;
 	cout << "Nume magazin: "; getline(in, aux);
 	m.numeMagazin = new char[aux.length() + 1];//calculeaza dim string-ului...
 	strcpy(m.numeMagazin, aux.c_str());
@@ -223,13 +225,15 @@ istream &operator>>(istream &in, Magazin &m) {
 	}
 	return in;
 }
-Magazin operator+(Magazin &m, int valoare) {
-	m.preturiProduse[0] += valoare;
-	return m;
+//op + nu ar trebui sa modifice operandul din stanga/dreapta
+//se returneaza un obiect temporar
+Magazin operator+(Magazin m, int valoare) {
+	Magazin temp = m;//se creaza un obiect nou temporar prin apelarea constr. de copiere
+	temp.preturiProduse[0] += valoare;
+	return temp;
 }
-Magazin operator+(int valoare, Magazin &m) {
-	m.preturiProduse[0] += valoare;
-	return m;
+Magazin operator+(int valoare, Magazin m) {
+	return m + valoare; //Daca operatorul de mai sus exista puteti sa-l apelati direct. Altfel, luati copy-paste ce se afla mai sus.
 }
 int main() {
 	Magazin m1;
@@ -272,7 +276,7 @@ int main() {
 
 	//op >> si <<
 	Magazin m5;
-	cin >> m5;
+	//cin >> m5;
 	cout << m5 << endl;
 
 	cout << "Operator --" << endl;
