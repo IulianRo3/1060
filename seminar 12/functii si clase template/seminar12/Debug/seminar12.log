@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\stud\desktop\seminar12\seminar12\source.cpp(39): warning C4715: 'List<int>::getElement': not all control paths return a value
+c:\users\stud\desktop\seminar12\seminar12\source.cpp(39): warning C4715: 'List<Persoana>::getElement': not all control paths return a value
+  seminar12.vcxproj -> C:\Users\stud\Desktop\seminar12\Debug\seminar12.exe
